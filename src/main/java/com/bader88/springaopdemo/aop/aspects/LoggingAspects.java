@@ -18,6 +18,7 @@ public class LoggingAspects {
     // execution(* PACKAGE.*.*(..))
     @Before("execution(* com.bader88.springaopdemo.aop.*.*.*(..))") // AspectJ pointcut expression specifying when the advice should be executed.
     public void logMethodCall(JoinPoint joinPoint){ // Advice method that logs information before method execution.
-        logger.info("Before Aspect - Method is called - {}", joinPoint); // Logging a message before method execution.
+        logger.info("Before Aspect Method - {} is called with arguments : {}",
+                joinPoint,joinPoint.getArgs()); // Logging a message before method execution.
     }
 }
