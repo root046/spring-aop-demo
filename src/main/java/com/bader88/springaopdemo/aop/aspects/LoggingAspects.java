@@ -14,12 +14,12 @@ public class LoggingAspects {
 
     //Pointcut - When?
     // execution(* PACKAGE.*.*(..))
-    @Before("execution(* com.bader88.springaopdemo.aop.*.*.*(..))") // AspectJ pointcut expression specifying when the advice should be executed.
+    @Before("com.bader88.springaopdemo.aop.aspects.CommonPointcutConfig.businessAndDataPackageConfig()") // take pointcut from CommonPointcutConfig class.
     public void logMethodCallBeforeExecution(JoinPoint joinPoint){ // Advice method that logs information before method execution.
         logger.info("Before Aspect Method - {} is called with arguments : {}",
                 joinPoint,joinPoint.getArgs()); // Logging a message before method execution.
     }
-    @After("execution(* com.bader88.springaopdemo.aop.*.*.*(..))")// Do something after a method is executed irrespective of whether : executes successfully OR  throws an exception
+    @After("com.bader88.springaopdemo.aop.aspects.CommonPointcutConfig.businessPackageConfig()") // take pointcut from CommonPointcutConfig class.
     public void logMethodCallAfterExecution(JoinPoint joinPoint){ // Advice method that logs information before method execution.
         logger.info("After Aspect Method - {} has executed or thrown", joinPoint); //Logging a message after a method execution or throws an exception.
     }
@@ -27,7 +27,7 @@ public class LoggingAspects {
     // Executed after an exception is thrown
     // see BusinessService1.calculateMax() to test @AfterThrowing un-comment below throw, and comment the return
     @AfterThrowing(
-            pointcut = "execution(* com.bader88.springaopdemo.aop.*.*.*(..))", // AspectJ expression defining when to execute this advice
+            pointcut = "com.bader88.springaopdemo.aop.aspects.CommonPointcutConfig.businessAndDataPackageConfig()", // take pointcut from CommonPointcutConfig class.
             throwing = "exception" // Parameter name to store the thrown exception
     )
     public void logMethodCallAfterThrowingException(JoinPoint joinPoint, Exception exception){ // Method to log information after an exception is thrown
@@ -36,7 +36,7 @@ public class LoggingAspects {
 
     // Executed after a successful execution
     @AfterReturning(
-            pointcut = "execution(* com.bader88.springaopdemo.aop.*.*.*(..))", // AspectJ expression defining when to execute this advice
+            pointcut = "com.bader88.springaopdemo.aop.aspects.CommonPointcutConfig.DataPackageConfig()", // take pointcut from CommonPointcutConfig class.
             returning = "resultValue" // Parameter name to store the returned value
     )
     public void logMethodCallAfterSuccessfulExecution(JoinPoint joinPoint, Object resultValue){ // Method to log information after a successful method execution

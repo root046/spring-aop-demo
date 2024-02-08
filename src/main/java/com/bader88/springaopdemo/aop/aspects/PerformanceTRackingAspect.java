@@ -13,7 +13,8 @@ public class PerformanceTRackingAspect {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
     // in DataService1 class Thread.sleep(30) added To notice the time difference
-    @Around("execution(* com.bader88.springaopdemo.aop.*.*.*(..))")
+    //@Around("com.bader88.springaopdemo.aop.aspects.CommonPointcutConfig.businessAndDataPackageConfig()")// take pointcut from CommonPointcutConfig class.
+    @Around("com.bader88.springaopdemo.aop.aspects.CommonPointcutConfig.trackTimeAnnotation()")// only methods that have trackTime Annotation
     public Object findExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         // start a timer`
         long startTimeMillis = System.currentTimeMillis();
